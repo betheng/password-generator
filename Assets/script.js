@@ -10,7 +10,6 @@ var alphaLowerArray = alphaLower.split("");
 var numArray = num.split("");
 var specCharArray = specChar.split("");
 
-
 // Gets references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
@@ -22,7 +21,7 @@ function writePassword() {
   password.value = passwordText;
 
 // Asks user expected length of password and validates it; if value entered is outside of 8-128 it prints alert
-  var passLength = prompt("How many characters would you like your password to be?");
+  var passLength = prompt("How many characters would you like your password to be?")
 
     if(passLength <8 || passLength >128) {
       alert("The password needs to be between 8 and 128 characters long. Please start again by selecting 'Generate Password'.");
@@ -40,6 +39,9 @@ function writePassword() {
       }
       if(confirm("If you would like your password to contain SPECIAL CHARACTERS select 'OK'.\nIf you would not like special characters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, specCharArray);
+      }
+      if(passwordText.length===0){
+        alert("You must enter a valid number between 8 and 128 to generate a password. Please start again by selecting 'Generate Password'.");
       }
 // Loops through array of criteria created above and generates a random char into a string until length of password input is hit
       else{
