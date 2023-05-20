@@ -1,44 +1,45 @@
+// Creates variables eligible to be used in generated passwords
 var alphaUpper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var alphaLower = "abcdefghijklmnopqrstuvwxyz";
 var num = "0123456789";
 var specChar = "!#$%&'()*+,-./:;<=>?@[\]^_`{|}~";
 
+// Splits variables into individual array items for randomization into generated password
 var alphaUpperArray = alphaUpper.split("");
 var alphaLowerArray = alphaLower.split("");
 var numArray = num.split("");
 var specCharArray = specChar.split("");
 
 
-// Get references to the #generate element
+// Gets references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-// Write password to the #password input
+// Writes password to the #password input
 function writePassword() {
   var password = "";
   var passwordText = document.querySelector("#password");
 
   password.value = passwordText;
 
+// Asks user expected length of password and validates it
   var passLength = prompt("How many characters would you like your password to be?");
 
     if(passLength <8 || passLength >128) {
       alert("The password needs to be between 8 and 128 characters long. Please start again by selecting 'Generate Password'.");
     }
+// Asks user one at a time what criteria they are looking to meet, adds the element to the end of the array   
     else {
-      if(confirm("Would you like your password to contain upper case letters?")){
+      if(confirm("If you would like your password to contain UPPERCASE LETTERS select 'OK'.\nIf you would NOT like uppercase letters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, alphaUpperArray);
       }
-      if(confirm("Would you like your password to contain lower case letters?")){
+      if(confirm("If you would like your password to contain LOWERCASE LETTERS select 'OK'.\nIf you would not like lowercase letters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, alphaLowerArray);
       }
-      if(confirm("Would you like your password to contain numbers?")){
+      if(confirm("If you would like your password to contain NUMBERS select 'OK'.\nIf you would not like numbers select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, numArray);
       }
-      if(confirm("Would you like your password to contain special characters?")){
+      if(confirm("If you would like your password to contain SPECIAL CHARACTERS select 'OK'.\nIf you would not like special characters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, specCharArray);
-      }
-      if(passwordText.length===0){
-        alert("You must make at least one selection to generate a password.");
       }
       else{
         for(var i=0; i<passLength; i++){
@@ -50,6 +51,5 @@ function writePassword() {
     document.getElementById("password").innerHTML = password;
 }
 
-
-// Add event listener to generate button
+// Adds event listener to generate button
 generateBtn.addEventListener("click", writePassword);
