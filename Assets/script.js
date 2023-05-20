@@ -21,13 +21,13 @@ function writePassword() {
 
   password.value = passwordText;
 
-// Asks user expected length of password and validates it
+// Asks user expected length of password and validates it; if value entered is outside of 8-128 it prints alert
   var passLength = prompt("How many characters would you like your password to be?");
 
     if(passLength <8 || passLength >128) {
       alert("The password needs to be between 8 and 128 characters long. Please start again by selecting 'Generate Password'.");
     }
-// Asks user one at a time what criteria they are looking to meet, adds the element to the end of the array   
+// Asks user one at a time what criteria they are looking to meet, either adds the element to the end of the array or skips criteria 
     else {
       if(confirm("If you would like your password to contain UPPERCASE LETTERS select 'OK'.\nIf you would NOT like uppercase letters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, alphaUpperArray);
@@ -41,6 +41,7 @@ function writePassword() {
       if(confirm("If you would like your password to contain SPECIAL CHARACTERS select 'OK'.\nIf you would not like special characters select 'Cancel'.")){
         Array.prototype.push.apply(passwordText, specCharArray);
       }
+// Loops through array of criteria created above and generates a random char into a string until length of password input is hit
       else{
         for(var i=0; i<passLength; i++){
           var random = Math.floor(Math.random()*passwordText.length);
@@ -48,6 +49,7 @@ function writePassword() {
         }
       }
     }
+// Places generated password in the UI readonly field    
     document.getElementById("password").innerHTML = password;
 }
 
